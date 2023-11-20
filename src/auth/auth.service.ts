@@ -89,36 +89,10 @@ export class AuthService {
 
     const payload = { ...payloadData, sub: data.id };
 
-    // return {
-    //   data: payloadData,
-    //   access_token: this.jwtService.sign(payload),
-    // };
-
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
-
-  // async validateStudent(studentID: string, password: string): Promise<any> {
-  //   // const user = await this.usersService.findOne(username);
-  //   const studentData = await this.studentsService.findByStudentID(studentID);
-  //   if (studentData && studentData.password === password) {
-  //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //     const { password, ...result } = studentData;
-  //     return result;
-  //   }
-  //   return null;
-  // }
-
-  // async login(studentData: Partial<Student>) {
-  //   const payload = {
-  //     username: studentData?.studentID,
-  //     sub: studentData?.id,
-  //   };
-  //   return {
-  //     access_token: this.jwtService.sign(payload),
-  //   };
-  // }
 
   async validateUserById(id: number): Promise<any> {
     return this.studentsService.findById(id);

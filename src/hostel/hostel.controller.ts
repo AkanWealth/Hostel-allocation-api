@@ -147,14 +147,6 @@ export class HostelController {
     }
   }
 
-  // @Post(':studentId/reassign/:newRoomId')
-  // async reassignStudent(
-  //   @Param('studentId') studentId: number,
-  //   @Param('newRoomId') newRoomId: number,
-  // ): Promise<Student> {
-  //   return this.hostelService.reassignStudent(studentId, newRoomId);
-  // }
-
   @Post(':studentId/reassign/:newRoomId/:newHostelId?')
   async reassignStudent(
     @Param('studentId') studentId: number,
