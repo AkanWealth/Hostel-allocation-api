@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Student {
+  id         Int      @id @default(autoincrement())
+  password   String
+  fullname   String
+  age        Int
+  studentID  String   @unique
+  department String
+  room       Room?    @relation(fields: [roomId], references: [id])
+  roomId     Int?
+  createdAt  DateTime @default(now())
+  updateAt   DateTime @updatedAt
+}
+
+model Hostel {
+  id        Int      @id @default(autoincrement())
+  name      String
+  rooms     Room[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Room {
+  id        Int       @id @default(autoincrement())
+  name      String
+  capacity  Int
+  status    String    @default("available")
+  hostel    Hostel?   @relation(fields: [hostelId], references: [id])
+  hostelId  Int?
+  students  Student[]
+  createdAt DateTime  @default(now())
+  updateAt  DateTime  @updatedAt
+}
